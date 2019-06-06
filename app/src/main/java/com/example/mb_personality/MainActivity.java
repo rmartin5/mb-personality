@@ -50,10 +50,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        personList = g_db.getAllPersonalities(g_db);
+        ListView listview = (ListView) findViewById(R.id.listView1);
+        adapter = new DbCursorAdapter(this, R.layout.list_row, personList, 0);
+        listview.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
+    }
+
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-        HashMap<String, String> hashMap = (HashMap<String, String>) l.getItemAtPosition(position);
+        Cursor c = (Cursor) l.getItemAtPosition(position);
+        String s = c.getString(c.getColumnIndex(Personality.C_NAME));
+        Log.i("MAIN", "clicked string is " + s);
         Intent intent = new Intent(this, Personality.class);
-        intent.putExtra(Personality.EXTRA_PERSON_ID, hashMap.get("name"));
+        intent.putExtra(Personality.EXTRA_PERSON_ID, c.getString(c.getColumnIndex(Personality.C_NAME)));
         startActivity(intent);
     }
 

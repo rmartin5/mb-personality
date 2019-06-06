@@ -56,7 +56,8 @@ public class Personality extends Activity {
     public static final String C_MOVEMENT = "movement";
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-            + C_NAME + " TEXT PRIMARY KEY,"
+            + " _id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + C_NAME + " TEXT,"
             + C_SE + " INTEGER," + C_NE + " INTEGER,"
             + C_TE + " INTEGER," + C_TI + " INTEGER,"
             + C_NI + " INTEGER," + C_SI + " INTEGER,"
@@ -180,7 +181,7 @@ public class Personality extends Activity {
         getTextViewValues();
 
         SQLiteDatabase db = g_db.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(21);
 
         values.put(C_NAME, person_name);
         values.put(C_SE, se);
@@ -204,8 +205,15 @@ public class Personality extends Activity {
         values.put(C_RESPONDING, responding);
         values.put(C_MOVEMENT, movement);
 
-        long i = db.insertWithOnConflict(TABLE_NAME, null, values, CONFLICT_IGNORE);
-        Log.i(TAG, "save return is " + i);
+        Log.i(TAG, "values is " + values);
+        Log.i(TAG, "create table is " + CREATE_TABLE);
+
+        //TODO seeing duplicate entries, fix below...
+        int exist = db.update(TABLE_NAME, values, C_NAME + "=?", null);
+        if (exist == 0) {
+            db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
+        }
+        Log.i(TAG, "save return is " + exist);
 
         //TODO REMOVE
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
@@ -215,6 +223,7 @@ public class Personality extends Activity {
         Log.i(TAG, "save count test is " + count + " and name is " + person_name);
 
         cursor.close();
+        finish();
     }
 
     private void getTextViewValues() {
