@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="3"
+    android:background="#ffffff"  >
+
+    <EditText
+        android:id="@+id/person_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="name" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/text1static"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stat1:"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_se"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/but1plus"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical"
+            android:onClick="increment"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/but1min"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical"
+            android:onClick="decrement"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/text2static"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stat2:"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_ne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/but2plus"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical"
+            android:onClick="increment"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/but2min"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical"
+            android:onClick="decrement"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="savePersonality"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="Save" />
+
+    </LinearLayout>
+
+</LinearLayout>
