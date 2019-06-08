@@ -155,13 +155,14 @@ public class Personality extends Activity {
         setTextView((TextView) findViewById(R.id.tv_se), se);
         setTextView((TextView) findViewById(R.id.tv_ne), ne);
         //TODO UNCOMMENT ALL once finished.
-        /*
+
         setTextView((TextView) findViewById(R.id.tv_te), te);
         setTextView((TextView) findViewById(R.id.tv_ti), ti);
         setTextView((TextView) findViewById(R.id.tv_ni), ni);
         setTextView((TextView) findViewById(R.id.tv_si), si);
         setTextView((TextView) findViewById(R.id.tv_fe), fe);
         setTextView((TextView) findViewById(R.id.tv_fi), fi);
+                /*
         setTextView((TextView) findViewById(R.id.tv_abstractt), abstractt);
         setTextView((TextView) findViewById(R.id.tv_affiliative), affiliative);
         setTextView((TextView) findViewById(R.id.tv_interest), interest);
@@ -208,36 +209,56 @@ public class Personality extends Activity {
         Log.i(TAG, "values is " + values);
         Log.i(TAG, "create table is " + CREATE_TABLE);
 
-        //TODO seeing duplicate entries, fix below...
-        int exist = db.update(TABLE_NAME, values, C_NAME + "=?", null);
-        if (exist == 0) {
-            db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
-        }
-        Log.i(TAG, "save return is " + exist);
 
-        //TODO REMOVE
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase dbb = g_db.getReadableDatabase();
         Cursor cursor = dbb.rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        Log.i(TAG, "save count test is " + count + " and name is " + person_name);
+        int countbefore = cursor.getCount();
+
+        //TODO seeing duplicate entries, fix below...
+        int exist = db.update(TABLE_NAME, values, C_NAME + " = ?", new String[]{person_name});
+
+        countQuery = "SELECT  * FROM " + TABLE_NAME;
+        dbb = g_db.getReadableDatabase();
+        cursor = dbb.rawQuery(countQuery, null);
+        int countupdate = cursor.getCount();
+        Log.i(TAG, "Exist output is " + exist + " countbefore: " + countbefore + " countupdate: " + countupdate);
+
+        if (exist == 0) {
+            long existconflict = db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
+
+            countQuery = "SELECT  * FROM " + TABLE_NAME;
+            dbb = g_db.getReadableDatabase();
+            cursor = dbb.rawQuery(countQuery, null);
+            int countconflict = cursor.getCount();
+            Log.i(TAG, "Exist conflict output is " + existconflict + " countconflict: " + countconflict);
+        }
+        Log.i(TAG, "save return is " + exist);
+
+        //TODO REMOVE extra stuff here...
+        Log.i(TAG, "save name is " + person_name);
 
         cursor.close();
         finish();
+    }
+
+    public void deletePersonality(View v) {
+        //TODO
     }
 
     private void getTextViewValues() {
         person_name = getTextViewString((TextView) findViewById(R.id.person_name));
         se = getTextViewInt((TextView) findViewById(R.id.tv_se));
         ne = getTextViewInt((TextView) findViewById(R.id.tv_ne));
-        /*
-        TODO
+
         te = getTextViewInt((TextView) findViewById(R.id.tv_te));
         ti = getTextViewInt((TextView) findViewById(R.id.tv_ti));
         ni = getTextViewInt((TextView) findViewById(R.id.tv_ni));
         si = getTextViewInt((TextView) findViewById(R.id.tv_si));
         fe = getTextViewInt((TextView) findViewById(R.id.tv_fe));
         fi = getTextViewInt((TextView) findViewById(R.id.tv_fi));
+                /*
+        TODO
         abstractt = getTextViewInt((TextView) findViewById(R.id.tv_abstractt));
         affiliative = getTextViewInt((TextView) findViewById(R.id.tv_affiliative));
         interest = getTextViewInt((TextView) findViewById(R.id.tv_interest));
@@ -255,11 +276,29 @@ public class Personality extends Activity {
 
     public void increment(View v) {
         switch(v.getId()) {
-            case (R.id.but1plus):
+            case (R.id.se_plus):
                 updateIncrement((TextView) findViewById(R.id.tv_se));
                 break;
-            case (R.id.but2plus):
+            case (R.id.ni_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_ni));
+                break;
+            case (R.id.ne_plus):
                 updateIncrement((TextView) findViewById(R.id.tv_ne));
+                break;
+            case (R.id.si_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_si));
+                break;
+            case (R.id.te_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_te));
+                break;
+            case (R.id.fe_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_fe));
+                break;
+            case (R.id.ti_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_ti));
+                break;
+            case (R.id.fi_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_fi));
                 break;
             default:
                 Log.i("Increment", "hit default...");
@@ -278,11 +317,29 @@ public class Personality extends Activity {
 
     public void decrement(View v) {
         switch(v.getId()) {
-            case (R.id.but1min):
+            case (R.id.se_min):
                 updateDecrement((TextView) findViewById(R.id.tv_se));
                 break;
-            case (R.id.but2min):
+            case (R.id.ni_min):
+                updateDecrement((TextView) findViewById(R.id.tv_ni));
+                break;
+            case (R.id.ne_min):
                 updateDecrement((TextView) findViewById(R.id.tv_ne));
+                break;
+            case (R.id.si_min):
+                updateDecrement((TextView) findViewById(R.id.tv_si));
+                break;
+            case (R.id.te_min):
+                updateDecrement((TextView) findViewById(R.id.tv_te));
+                break;
+            case (R.id.fe_min):
+                updateDecrement((TextView) findViewById(R.id.tv_fe));
+                break;
+            case (R.id.ti_min):
+                updateDecrement((TextView) findViewById(R.id.tv_ti));
+                break;
+            case (R.id.fi_min):
+                updateDecrement((TextView) findViewById(R.id.tv_fi));
                 break;
             default:
                 Log.i("Decrement", "hit default...");

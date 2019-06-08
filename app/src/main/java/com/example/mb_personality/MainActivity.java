@@ -42,8 +42,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(this);
 
-        //NOTE: it seems to fail due to no _id, which may be needed for CursorAdapter... look into this...
-
         //NOTE:
         // both helpful for setting up Database.
         // http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/
@@ -57,7 +55,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         ListView listview = (ListView) findViewById(R.id.listView1);
         adapter = new DbCursorAdapter(this, R.layout.list_row, personList, 0);
         listview.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
     }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
