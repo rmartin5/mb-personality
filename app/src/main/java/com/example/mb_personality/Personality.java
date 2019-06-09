@@ -1,21 +1,13 @@
 package com.example.mb_personality;
 
 import android.app.Activity;
-import android.app.Person;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
@@ -27,10 +19,6 @@ public class Personality extends Activity {
 
     public static final int DEFAULT_VALUE = 0;
     public static final String DEFAULT_NAME = "New Person";
-
-    //public static final String PREFERENCE_NAME = "com.example.mb_personality.preferences.NAME";
-    //public static final String PREFERENCE_STAT1 = "com.example.mb_personality.preferences.STAT1";
-    //public static final String PREFERENCE_STAT2 = "com.example.mb_personality.preferences.STAT2";
 
     public static final String TABLE_NAME = "person_table";
     public static final String C_NAME = "name";
@@ -154,15 +142,12 @@ public class Personality extends Activity {
         setTextView((TextView) findViewById(R.id.person_name), person_name);
         setTextView((TextView) findViewById(R.id.tv_se), se);
         setTextView((TextView) findViewById(R.id.tv_ne), ne);
-        //TODO UNCOMMENT ALL once finished.
-
         setTextView((TextView) findViewById(R.id.tv_te), te);
         setTextView((TextView) findViewById(R.id.tv_ti), ti);
         setTextView((TextView) findViewById(R.id.tv_ni), ni);
         setTextView((TextView) findViewById(R.id.tv_si), si);
         setTextView((TextView) findViewById(R.id.tv_fe), fe);
         setTextView((TextView) findViewById(R.id.tv_fi), fi);
-                /*
         setTextView((TextView) findViewById(R.id.tv_abstractt), abstractt);
         setTextView((TextView) findViewById(R.id.tv_affiliative), affiliative);
         setTextView((TextView) findViewById(R.id.tv_interest), interest);
@@ -175,7 +160,6 @@ public class Personality extends Activity {
         setTextView((TextView) findViewById(R.id.tv_informative), informative);
         setTextView((TextView) findViewById(R.id.tv_responding), responding);
         setTextView((TextView) findViewById(R.id.tv_movement), movement);
-        */
     }
 
     public void savePersonality(View v) {
@@ -206,59 +190,31 @@ public class Personality extends Activity {
         values.put(C_RESPONDING, responding);
         values.put(C_MOVEMENT, movement);
 
-        Log.i(TAG, "values is " + values);
-        Log.i(TAG, "create table is " + CREATE_TABLE);
-
-
-        String countQuery = "SELECT  * FROM " + TABLE_NAME;
-        SQLiteDatabase dbb = g_db.getReadableDatabase();
-        Cursor cursor = dbb.rawQuery(countQuery, null);
-        int countbefore = cursor.getCount();
-
-        //TODO seeing duplicate entries, fix below...
         int exist = db.update(TABLE_NAME, values, C_NAME + " = ?", new String[]{person_name});
-
-        countQuery = "SELECT  * FROM " + TABLE_NAME;
-        dbb = g_db.getReadableDatabase();
-        cursor = dbb.rawQuery(countQuery, null);
-        int countupdate = cursor.getCount();
-        Log.i(TAG, "Exist output is " + exist + " countbefore: " + countbefore + " countupdate: " + countupdate);
-
         if (exist == 0) {
-            long existconflict = db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
-
-            countQuery = "SELECT  * FROM " + TABLE_NAME;
-            dbb = g_db.getReadableDatabase();
-            cursor = dbb.rawQuery(countQuery, null);
-            int countconflict = cursor.getCount();
-            Log.i(TAG, "Exist conflict output is " + existconflict + " countconflict: " + countconflict);
+            db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
         }
-        Log.i(TAG, "save return is " + exist);
-
-        //TODO REMOVE extra stuff here...
-        Log.i(TAG, "save name is " + person_name);
-
-        cursor.close();
+        Log.i(TAG, "save return is " + exist + " for " + person_name);
         finish();
     }
 
     public void deletePersonality(View v) {
-        //TODO
+        SQLiteDatabase db = g_db.getWritableDatabase();
+        int rv = db.delete(TABLE_NAME, C_NAME + " = ?", new String[]{person_name});
+        Log.i(TAG, "delete return is " + rv + " for " + person_name);
+        finish();
     }
 
     private void getTextViewValues() {
         person_name = getTextViewString((TextView) findViewById(R.id.person_name));
         se = getTextViewInt((TextView) findViewById(R.id.tv_se));
         ne = getTextViewInt((TextView) findViewById(R.id.tv_ne));
-
         te = getTextViewInt((TextView) findViewById(R.id.tv_te));
         ti = getTextViewInt((TextView) findViewById(R.id.tv_ti));
         ni = getTextViewInt((TextView) findViewById(R.id.tv_ni));
         si = getTextViewInt((TextView) findViewById(R.id.tv_si));
         fe = getTextViewInt((TextView) findViewById(R.id.tv_fe));
         fi = getTextViewInt((TextView) findViewById(R.id.tv_fi));
-                /*
-        TODO
         abstractt = getTextViewInt((TextView) findViewById(R.id.tv_abstractt));
         affiliative = getTextViewInt((TextView) findViewById(R.id.tv_affiliative));
         interest = getTextViewInt((TextView) findViewById(R.id.tv_interest));
@@ -271,7 +227,6 @@ public class Personality extends Activity {
         informative = getTextViewInt((TextView) findViewById(R.id.tv_informative));
         responding = getTextViewInt((TextView) findViewById(R.id.tv_responding));
         movement = getTextViewInt((TextView) findViewById(R.id.tv_movement));
-         */
     }
 
     public void increment(View v) {
@@ -299,6 +254,42 @@ public class Personality extends Activity {
                 break;
             case (R.id.fi_plus):
                 updateIncrement((TextView) findViewById(R.id.tv_fi));
+                break;
+            case (R.id.abstractt_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_abstractt));
+                break;
+            case (R.id.affiliative_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_affiliative));
+                break;
+            case (R.id.interest_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_interest));
+                break;
+            case (R.id.direct_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_direct));
+                break;
+            case (R.id.initiating_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_initiating));
+                break;
+            case (R.id.control_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_control));
+                break;
+            case (R.id.concrete_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_concrete));
+                break;
+            case (R.id.pragmatic_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_pragmatic));
+                break;
+            case (R.id.systematic_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_systematic));
+                break;
+            case (R.id.informative_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_informative));
+                break;
+            case (R.id.responding_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_responding));
+                break;
+            case (R.id.movement_plus):
+                updateIncrement((TextView) findViewById(R.id.tv_movement));
                 break;
             default:
                 Log.i("Increment", "hit default...");
@@ -341,6 +332,42 @@ public class Personality extends Activity {
             case (R.id.fi_min):
                 updateDecrement((TextView) findViewById(R.id.tv_fi));
                 break;
+            case (R.id.abstractt_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_abstractt));
+                break;
+            case (R.id.affiliative_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_affiliative));
+                break;
+            case (R.id.interest_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_interest));
+                break;
+            case (R.id.direct_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_direct));
+                break;
+            case (R.id.initiating_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_initiating));
+                break;
+            case (R.id.control_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_control));
+                break;
+            case (R.id.concrete_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_concrete));
+                break;
+            case (R.id.pragmatic_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_pragmatic));
+                break;
+            case (R.id.systematic_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_systematic));
+                break;
+            case (R.id.informative_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_informative));
+                break;
+            case (R.id.responding_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_responding));
+                break;
+            case (R.id.movement_plus):
+                updateDecrement((TextView) findViewById(R.id.tv_movement));
+                break;
             default:
                 Log.i("Decrement", "hit default...");
         }
@@ -361,11 +388,9 @@ public class Personality extends Activity {
     private void setTextView(TextView tv, String str) {
         tv.setText("" + str);
     }
-
     private String getTextViewString(TextView tv) {
         return tv.getText().toString();
     }
-
     private int getTextViewInt(TextView tv) {
         return Integer.parseInt(tv.getText().toString());
     }

@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListItemDetail"></activity>
         <activity android:name=".Personality"></activity>
         <activity android:name=".DatabaseHelper"></activity>
         <activity android:name=".DbCursorAdapter"></activity>
