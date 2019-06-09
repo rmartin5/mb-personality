@@ -332,40 +332,40 @@ public class Personality extends Activity {
             case (R.id.fi_min):
                 updateDecrement((TextView) findViewById(R.id.tv_fi));
                 break;
-            case (R.id.abstractt_plus):
+            case (R.id.abstractt_min):
                 updateDecrement((TextView) findViewById(R.id.tv_abstractt));
                 break;
-            case (R.id.affiliative_plus):
+            case (R.id.affiliative_min):
                 updateDecrement((TextView) findViewById(R.id.tv_affiliative));
                 break;
-            case (R.id.interest_plus):
+            case (R.id.interest_min):
                 updateDecrement((TextView) findViewById(R.id.tv_interest));
                 break;
-            case (R.id.direct_plus):
+            case (R.id.direct_min):
                 updateDecrement((TextView) findViewById(R.id.tv_direct));
                 break;
-            case (R.id.initiating_plus):
+            case (R.id.initiating_min):
                 updateDecrement((TextView) findViewById(R.id.tv_initiating));
                 break;
-            case (R.id.control_plus):
+            case (R.id.control_min):
                 updateDecrement((TextView) findViewById(R.id.tv_control));
                 break;
-            case (R.id.concrete_plus):
+            case (R.id.concrete_min):
                 updateDecrement((TextView) findViewById(R.id.tv_concrete));
                 break;
-            case (R.id.pragmatic_plus):
+            case (R.id.pragmatic_min):
                 updateDecrement((TextView) findViewById(R.id.tv_pragmatic));
                 break;
-            case (R.id.systematic_plus):
+            case (R.id.systematic_min):
                 updateDecrement((TextView) findViewById(R.id.tv_systematic));
                 break;
-            case (R.id.informative_plus):
+            case (R.id.informative_min):
                 updateDecrement((TextView) findViewById(R.id.tv_informative));
                 break;
-            case (R.id.responding_plus):
+            case (R.id.responding_min):
                 updateDecrement((TextView) findViewById(R.id.tv_responding));
                 break;
-            case (R.id.movement_plus):
+            case (R.id.movement_min):
                 updateDecrement((TextView) findViewById(R.id.tv_movement));
                 break;
             default:
