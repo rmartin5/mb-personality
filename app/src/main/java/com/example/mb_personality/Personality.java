@@ -377,8 +377,10 @@ public class Personality extends Activity {
         String svalue = tv.getText().toString();
         if (!svalue.equals("")) {
             int num = Integer.parseInt(svalue);
-            num-=1;
-            tv.setText("" + num);
+            if (num > 0) {
+                num-=1;
+                tv.setText("" + num);
+            }
         }
     }
 
