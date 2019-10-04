@@ -160,6 +160,8 @@ public class Personality extends Activity {
         setTextView((TextView) findViewById(R.id.tv_informative), informative);
         setTextView((TextView) findViewById(R.id.tv_responding), responding);
         setTextView((TextView) findViewById(R.id.tv_movement), movement);
+
+        UpdateDomTraits();
     }
 
     public void savePersonality(View v) {
@@ -303,6 +305,7 @@ public class Personality extends Activity {
             int num = Integer.parseInt(svalue);
             num+=1;
             tv.setText("" + num);
+            UpdateDomTraits();
         }
     }
 
@@ -380,6 +383,7 @@ public class Personality extends Activity {
             if (num > 0) {
                 num-=1;
                 tv.setText("" + num);
+                UpdateDomTraits();
             }
         }
     }
@@ -395,5 +399,54 @@ public class Personality extends Activity {
     }
     private int getTextViewInt(TextView tv) {
         return Integer.parseInt(tv.getText().toString());
+    }
+
+    private void UpdateDomTraits() {
+        String domTrait = "";
+        int etrait, itrait;
+
+        //sensing
+        etrait = getTextViewInt((TextView) findViewById(R.id.tv_se));
+        itrait = getTextViewInt((TextView) findViewById(R.id.tv_si));
+        if (etrait > itrait) {
+            domTrait += "Se, ";
+        } else if (itrait > etrait) {
+            domTrait += "Si, ";
+        } else {
+            domTrait += "  , ";
+        }
+
+        //intuition
+        etrait = getTextViewInt((TextView) findViewById(R.id.tv_ne));
+        itrait = getTextViewInt((TextView) findViewById(R.id.tv_ni));
+        if (etrait > itrait) {
+            domTrait += "Ne, ";
+        } else if (itrait > etrait) {
+            domTrait += "Ni, ";
+        } else {
+            domTrait += "  , ";
+        }
+
+        //feeling
+        etrait = getTextViewInt((TextView) findViewById(R.id.tv_fe));
+        itrait = getTextViewInt((TextView) findViewById(R.id.tv_fi));
+        if (etrait > itrait) {
+            domTrait += "Fe, ";
+        } else if (itrait > etrait) {
+            domTrait += "Fi, ";
+        } else {
+            domTrait += "  , ";
+        }
+
+        //thinking
+        etrait = getTextViewInt((TextView) findViewById(R.id.tv_te));
+        itrait = getTextViewInt((TextView) findViewById(R.id.tv_ti));
+        if (etrait > itrait) {
+            domTrait += "Te";
+        } else if (itrait > etrait) {
+            domTrait += "Ti";
+        }
+
+        setTextView((TextView) findViewById(R.id.tv_dom_traits), domTrait);
     }
 }
