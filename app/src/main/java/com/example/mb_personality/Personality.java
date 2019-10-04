@@ -18,7 +18,7 @@ public class Personality extends Activity {
     public static final String EXTRA_PERSON_ID = "com.example.mb_personality.PERSON_ID";
 
     public static final int DEFAULT_VALUE = 0;
-    public static final String DEFAULT_NAME = "New Person";
+    public static final String DEFAULT_NAME = " Name ";
 
     public static final String TABLE_NAME = "person_table";
     public static final String C_NAME = "name";
