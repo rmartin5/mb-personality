@@ -410,10 +410,8 @@ public class Personality extends Activity {
         itrait = getTextViewInt((TextView) findViewById(R.id.tv_si));
         if (etrait > itrait) {
             domTrait += "Se, ";
-        } else if (itrait > etrait) {
-            domTrait += "Si, ";
         } else {
-            domTrait += "  , ";
+            domTrait += "Si, ";
         }
 
         //intuition
@@ -421,10 +419,8 @@ public class Personality extends Activity {
         itrait = getTextViewInt((TextView) findViewById(R.id.tv_ni));
         if (etrait > itrait) {
             domTrait += "Ne, ";
-        } else if (itrait > etrait) {
-            domTrait += "Ni, ";
         } else {
-            domTrait += "  , ";
+            domTrait += "Ni, ";
         }
 
         //feeling
@@ -432,10 +428,8 @@ public class Personality extends Activity {
         itrait = getTextViewInt((TextView) findViewById(R.id.tv_fi));
         if (etrait > itrait) {
             domTrait += "Fe, ";
-        } else if (itrait > etrait) {
-            domTrait += "Fi, ";
         } else {
-            domTrait += "  , ";
+            domTrait += "Fi, ";
         }
 
         //thinking
@@ -443,7 +437,7 @@ public class Personality extends Activity {
         itrait = getTextViewInt((TextView) findViewById(R.id.tv_ti));
         if (etrait > itrait) {
             domTrait += "Te";
-        } else if (itrait > etrait) {
+        } else {
             domTrait += "Ti";
         }
 
