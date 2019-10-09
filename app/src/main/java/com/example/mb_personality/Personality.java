@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
 public class Personality extends Activity {
@@ -18,7 +20,7 @@ public class Personality extends Activity {
     public static final String EXTRA_PERSON_ID = "com.example.mb_personality.PERSON_ID";
 
     public static final int DEFAULT_VALUE = 0;
-    public static final String DEFAULT_NAME = " Name ";
+    public static final String DEFAULT_NAME = "";
 
     public static final String TABLE_NAME = "person_table";
     public static final String C_NAME = "name";
@@ -81,6 +83,9 @@ public class Personality extends Activity {
     private int responding;
     private int movement;
 
+    private boolean isNew;
+    public String orig_name;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +101,10 @@ public class Personality extends Activity {
             abstractt = affiliative = interest = direct = DEFAULT_VALUE;
             initiating = control = concrete = pragmatic = DEFAULT_VALUE;
             systematic = informative = responding = movement = DEFAULT_VALUE;
+            isNew = true;
         } else {
+            isNew = false;
+
             SQLiteDatabase db = g_db.getReadableDatabase();
 
             //get all personId columns
@@ -137,6 +145,8 @@ public class Personality extends Activity {
 
             cursor.close();
         }
+
+        orig_name = person_name;
 
         //populate all fields
         setTextView((TextView) findViewById(R.id.person_name), person_name);
@@ -194,6 +204,10 @@ public class Personality extends Activity {
 
         int exist = db.update(TABLE_NAME, values, C_NAME + " = ?", new String[]{person_name});
         if (exist == 0) {
+            if(isNew==false) {
+                //overwrite old entry
+                db.delete(TABLE_NAME, C_NAME + " = ?", new String[]{orig_name});
+            }
             db.insertWithOnConflict(TABLE_NAME,null, values, CONFLICT_IGNORE);
         }
         Log.i(TAG, "save return is " + exist + " for " + person_name);
