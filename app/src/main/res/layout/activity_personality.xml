@@ -404,8 +404,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1.8"
+                    android:layout_weight="1"
                     android:text="  ,  ,  ,  " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/style_traits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.08"
+                    android:text="Personality Style: " />
+
+                <TextView
+                    android:id="@+id/tv_style_traits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="" />
 
             </LinearLayout>
 
@@ -894,6 +919,8 @@
                     android:onClick="decrement"
                     android:text="-" />
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
