@@ -172,6 +172,7 @@ public class Personality extends Activity {
         setTextView((TextView) findViewById(R.id.tv_movement), movement);
 
         UpdateDomTraits();
+        UpdateStyleTrait();
     }
 
     public void savePersonality(View v) {
@@ -320,6 +321,7 @@ public class Personality extends Activity {
             num+=1;
             tv.setText("" + num);
             UpdateDomTraits();
+            UpdateStyleTrait();
         }
     }
 
@@ -398,6 +400,7 @@ public class Personality extends Activity {
                 num-=1;
                 tv.setText("" + num);
                 UpdateDomTraits();
+                UpdateStyleTrait();
             }
         }
     }
@@ -456,5 +459,121 @@ public class Personality extends Activity {
         }
 
         setTextView((TextView) findViewById(R.id.tv_dom_traits), domTrait);
+    }
+
+    private void UpdateStyleTrait() {
+        String C_A, A_P, I_S, D_I, I_R, C_M;
+        String style_output;
+
+        //determine style outcomes
+        if (getTextViewInt((TextView) findViewById(R.id.tv_abstractt)) > getTextViewInt((TextView) findViewById(R.id.tv_concrete))) {
+            C_A = "A";
+        } else {
+            C_A = "C";
+        }
+
+        if (getTextViewInt((TextView) findViewById(R.id.tv_affiliative)) > getTextViewInt((TextView) findViewById(R.id.tv_pragmatic))) {
+            A_P = "A";
+        } else {
+            A_P = "P";
+        }
+
+        if (getTextViewInt((TextView) findViewById(R.id.tv_interest)) > getTextViewInt((TextView) findViewById(R.id.tv_systematic))) {
+            I_S = "I";
+        } else {
+            I_S = "S";
+        }
+
+        if (getTextViewInt((TextView) findViewById(R.id.tv_direct)) > getTextViewInt((TextView) findViewById(R.id.tv_informative))) {
+            D_I = "D";
+        } else {
+            D_I = "I";
+        }
+
+        if (getTextViewInt((TextView) findViewById(R.id.tv_initiating)) > getTextViewInt((TextView) findViewById(R.id.tv_responding))) {
+            I_R = "I";
+        } else {
+            I_R = "R";
+        }
+
+        if (getTextViewInt((TextView) findViewById(R.id.tv_control)) > getTextViewInt((TextView) findViewById(R.id.tv_movement))) {
+            C_M = "C";
+        } else {
+            C_M = "M";
+        }
+
+        //ugly comparison
+        while(true) {
+
+            if (C_A.equals("C") && A_P.equals("A") && I_S.equals("S") && D_I.equals("D") && I_R.equals("I") && C_M.equals("C")) {
+                style_output = "ESTJ : Overseer";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("P") && I_S.equals("I") && D_I.equals("D") && I_R.equals("I") && C_M.equals("C")) {
+                style_output = "ESTP : Persuader";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("P") && I_S.equals("S") && D_I.equals("D") && I_R.equals("I") && C_M.equals("C")) {
+                style_output = "ENTJ : Chief";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("A") && I_S.equals("I") && D_I.equals("D") && I_R.equals("I") && C_M.equals("C")) {
+                style_output = "ENFJ : Mentor";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("A") && I_S.equals("S") && D_I.equals("I") && I_R.equals("I") && C_M.equals("M")) {
+                style_output = "ESFJ : Supporter";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("P") && I_S.equals("I") && D_I.equals("I") && I_R.equals("I") && C_M.equals("M")) {
+                style_output = "ESFP : Entertainer";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("P") && I_S.equals("S") && D_I.equals("I") && I_R.equals("I") && C_M.equals("M")) {
+                style_output = "ENTP : Visionary";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("A") && I_S.equals("I") && D_I.equals("I") && I_R.equals("I") && C_M.equals("M")) {
+                style_output = "ENFP : Advocate";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("A") && I_S.equals("S") && D_I.equals("D") && I_R.equals("R") && C_M.equals("M")) {
+                style_output = "ISTJ : Examiner";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("P") && I_S.equals("I") && D_I.equals("D") && I_R.equals("R") && C_M.equals("M")) {
+                style_output = "ISTP : Craftsman";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("P") && I_S.equals("S") && D_I.equals("D") && I_R.equals("R") && C_M.equals("M")) {
+                style_output = "INTJ : Strategist";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("A") && I_S.equals("I") && D_I.equals("D") && I_R.equals("R") && C_M.equals("M")) {
+                style_output = "INFJ : Sage";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("A") && I_S.equals("S") && D_I.equals("I") && I_R.equals("R") && C_M.equals("C")) {
+                style_output = "ISFJ : Defender";
+                break;
+            }
+            if (C_A.equals("C") && A_P.equals("P") && I_S.equals("I") && D_I.equals("I") && I_R.equals("R") && C_M.equals("C")) {
+                style_output = "ISFP : Artist";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("P") && I_S.equals("S") && D_I.equals("I") && I_R.equals("R") && C_M.equals("C")) {
+                style_output = "INTP : Engineer";
+                break;
+            }
+            if (C_A.equals("A") && A_P.equals("A") && I_S.equals("I") && D_I.equals("I") && I_R.equals("R") && C_M.equals("C")) {
+                style_output = "INFP : Dreamer";
+                break;
+            }
+
+            style_output = "N/A";
+            break;
+        }
+
+        setTextView((TextView) findViewById(R.id.tv_style_traits), style_output);
     }
 }
